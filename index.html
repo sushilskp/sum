@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety Alert - ATSS College</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e91e63;
+            --secondary-color: #673ab7;
+            --accent-color: #ff5722;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+            background-color: #f8f9fa; /* Light background for overall site */
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sos-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ff1744, #d50000);
+            border: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 23, 68, 0.4);
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .sos-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 30px rgba(255, 23, 68, 0.6);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 23, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 23, 68, 0); }
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            transition: all 0.3s ease;
+            border: 1px solid #eee; /* Subtle border */
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02); /* Slightly larger on hover */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+            padding-bottom: 5px; /* Space for underline */
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px; /* Thicker underline */
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .chatbot-widget {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            z-index: 999;
+            width: 350px;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background-color: white; /* Ensure chatbot background is white */
+        }
+
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 120px;
+            right: 110px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(103, 58, 183, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            background: var(--primary-color);
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.9), rgba(103, 58, 183, 0.9)), url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1ffc1118-3f8b-41d2-9795-5f4a026d01b3.png') center/cover;
+            background-size: cover; /* Ensure image covers the area */
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative; /* For hero text animation */
+            overflow: hidden; /* Hide overflow for animations */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-title-animation {
+            animation: slideInFromLeft 1s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+
+        .hero-subtitle-animation {
+            animation: slideInFromRight 1s ease-out 0.3s forwards;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        @keyframes slideInFromLeft {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInFromRight {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .emergency-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Darker overlay */
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2.5rem; /* More padding */
+            border-radius: 15px;
+            text-align: center;
+            max-width: 450px; /* Slightly wider */
+            width: 90%;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Stronger shadow */
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .chatbot-widget {
+                width: 300px;
+                height: 400px;
+                bottom: 100px;
+                right: 10px;
+            }
+            
+            .chatbot-toggle {
+                bottom: 100px;
+                right: 90px;
+            }
+            
+            .sos-button {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+
+            .hero-section h1 {
+                font-size: 3rem; /* Adjust for smaller screens */
+            }
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+        }
+
+        .alert-animation {
+            animation: alertBlink 1s infinite;
+        }
+
+        @keyframes alertBlink {
+            0%, 50% { background-color: var(--danger-color); }
+            51%, 100% { background-color: var(--warning-color); }
+        }
+
+        /* Contact Form specific styles */
+        .contact-form-input, .contact-form-select, .contact-form-textarea {
+            border: 1px solid #ddd;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .contact-form-input:focus, .contact-form-select:focus, .contact-form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.2); /* Custom focus ring */
+        }
+
+        /* Footer gradient */
+        .footer-gradient {
+            background: linear-gradient(135deg, #343a40, #212529); /* Darker gradient for footer */
+        }
+    </style>
+</head>
+<body>
+    <!-- Audio element for SOS sound -->
+    <audio id="sosSound" src="1.mp3" preload="auto"></audio>
+
+    <!-- Header -->
+    <header class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-800">ATSS College</h1>
+                        <p class="text-sm text-gray-600">Women Safety Alert</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-pink-600 font-medium">Home</a>
+                    <a href="#features" class="nav-link text-gray-700 hover:text-pink-600 font-medium">Features</a>
+                    <a href="#about" class="nav-link text-gray-700 hover:text-pink-600 font-medium">About</a>
+                    <a href="#resources" class="nav-link text-gray-700 hover:text-pink-600 font-medium">Resources</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-pink-600 font-medium">Contact</a>
+                </nav>
+
+                <button class="md:hidden text-gray-700" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="container mx-auto px-4 py-4">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-pink-600">Home</a>
+                <a href="#features" class="block py-2 text-gray-700 hover:text-pink-600">Features</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-pink-600">About</a>
+                <a href="#resources" class="block py-2 text-gray-700 hover:text-pink-600">Resources</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-pink-600">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container mx-auto px-4 text-center hero-content">
+            <div class="max-w-4xl mx-auto">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dbd62c22-3ac6-4c41-8ef4-6e2489abbbaf.png" alt="Women empowerment symbol with protective shield and safety elements in pink and purple colors" class="mx-auto mb-8 rounded-full shadow-2xl">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 hero-title-animation">
+                    Empowering Women's <span class="text-yellow-300">Safety</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 hero-subtitle-animation">
+                    Your safety companion - Real-time alerts, community support, and instant emergency response
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button onclick="showAlert('Getting Started guide will be available soon!')" class="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                        Get Started Now
+                    </button>
+                    <button onclick="document.getElementById('features').scrollIntoView()" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-pink-600 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Safety Features</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Comprehensive safety tools designed to protect and empower women in every situation</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- SOS Alert -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">SOS Alert Button</h3>
+                    <p class="text-gray-600 text-center">Instant emergency alerts to trusted contacts, police, and nearby helpers with live location tracking.</p>
+                </div>
+
+                <!-- Real-time Location -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-map-marker-alt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Real-Time Location</h3>
+                    <p class="text-gray-600 text-center">Continuous GPS tracking for trusted contacts and law enforcement for faster response times.</p>
+                </div>
+
+                <!-- Multiple Alerts -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-broadcast-tower text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Multiple Alert Channels</h3>
+                    <p class="text-gray-600 text-center">Alerts via SMS, WhatsApp, email, and automated calls ensuring message delivery.</p>
+                </div>
+
+                <!-- Discreet Triggers -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-hand-paper text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Discreet Triggers</h3>
+                    <p class="text-gray-600 text-center">Emergency activation by voice command, device shaking, or quick button sequences.</p>
+                </div>
+
+                <!-- Community Alerts -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-users text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Community Support</h3>
+                    <p class="text-gray-600 text-center">Notify registered volunteers and nearby users to provide immediate assistance.</p>
+                </div>
+
+                <!-- Anonymous Reporting -->
+                <div class="feature-card">
+                    <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-user-secret text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-center">Anonymous Reporting</h3>
+                    <p class="text-gray-600 text-center">Report unsafe incidents without revealing identity, helping create safer communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">About Our Initiative</h2>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Women's safety is an urgent and ongoing societal concern. Despite technological advancements and increased awareness, incidents of harassment and threats persist in both urban and rural contexts.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        This project proposes the development of a Women Safety Alert Website — a secure, real-time platform designed to empower women with rapid emergency alert systems, safety resources, location sharing, and community support features.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-pink-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Instant Emergency Response</h4>
+                                <p class="text-gray-600">Alert mechanism with live tracking</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-pink-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Community Integration</h4>
+                                <p class="text-gray-600">Connect with trusted contacts and authorities</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                <i class="fas fa-check text-pink-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800">Privacy & Security</h4>
+                                <p class="text-gray-600">Full encryption and privacy controls</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/75f65ff7-832b-410f-897d-2afd95c1a90e.png" alt="Diverse group of women using safety technology with smartphones and emergency alert interfaces in a modern supportive environment" class="rounded-lg shadow-2xl mx-auto">
+                    
+                    <div class="mt-8 bg-gray-50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">ATSS College of Business Studies</h3>
+                        <p class="text-gray-600 mb-2">Chinchwad, Pune-19</p>
+                        <p class="text-sm text-gray-500">Affiliated to Savitribai Phule Pune University</p>
+                        <p class="text-sm text-gray-500">Recognized by Govt. of Maharashtra</p>
+                        <p class="text-sm text-gray-500">Re-accredited by NAAC, UGC Recognized Under 2(F) & 12(B)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="section-padding bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Safety Resources</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Educational materials, helplines, and tools to keep you informed and prepared</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Emergency Helplines -->
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-phone text-red-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Emergency Helplines</h3>
+                    <div class="space-y-2 text-sm">
+                        <p><strong>Women Helpline:</strong> 1091</p>
+                        <p><strong>Police:</strong> 100</p>
+                        <p><strong>Ambulance:</strong> 108</p>
+                        <p><strong>Fire:</strong> 101</p>
+                    </div>
+                </div>
+
+                <!-- Self Defense -->
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-fist-raised text-orange-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Self Defense</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Basic self-defense techniques</li>
+                        <li>• Situational awareness tips</li>
+                        <li>• Safety equipment guide</li>
+                        <li>• Online training videos</li>
+                    </ul>
+                </div>
+
+                <!-- Legal Aid -->
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-balance-scale text-blue-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Legal Aid</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Know your rights</li>
+                        <li>• Legal consultation</li>
+                        <li>• Filing complaints guide</li>
+                        <li>• Support groups</li>
+                    </ul>
+                </div>
+
+                <!-- Safety Tips -->
+                <div class="bg-white rounded-lg p-6 shadow-lg">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-lightbulb text-green-600 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3">Safety Tips</h3>
+                    <ul class="text-sm space-y-1">
+                        <li>• Travel safety guidelines</li>
+                        <li>• Home security tips</li>
+                        <li>• Digital safety practices</li>
+                        <li>• Emergency preparedness</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Quick Access Directory -->
+            <div class="mt-16 bg-white rounded-lg p-8 shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-center text-gray-800">Quick Access Directory</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <button onclick="showAlert('Connecting to emergency services...')" class="bg-red-600 hover:bg-red-700 text-white p-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-ambulance text-2xl mb-2"></i>
+                        <div class="font-semibold">Emergency Services</div>
+                    </button>
+                    
+                    <button onclick="showAlert('Connecting to counseling services...')" class="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-heart text-2xl mb-2"></i>
+                        <div class="font-semibold">Counseling Support</div>
+                    </button>
+                    
+                    <button onclick="showAlert('Connecting to legal aid...')" class="bg-purple-600 hover:bg-purple-700 text-white p-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                        <i class="fas fa-gavel text-2xl mb-2"></i>
+                        <div class="font-semibold">Legal Aid</div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Get In Touch</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">Have questions or need support? We're here to help 24/7</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-lg p-8 shadow-md"> <!-- Added shadow -->
+                    <h3 class="text-2xl font-bold mb-6 text-gray-800">Send us a Message</h3>
+                    <form onsubmit="handleFormSubmit(event)">
+                        <div class="grid md:grid-cols-2 gap-4 mb-4">
+                            <input type="text" placeholder="First Name" required class="w-full contact-form-input">
+                            <input type="text" placeholder="Last Name" required class="w-full contact-form-input">
+                        </div>
+                        <input type="email" placeholder="Email Address" required class="w-full contact-form-input mb-4">
+                        <input type="tel" placeholder="Phone Number" class="w-full contact-form-input mb-4">
+                        <select class="w-full contact-form-select mb-4">
+                            <option>General Inquiry</option>
+                            <option>Technical Support</option>
+                            <option>Emergency Report</option>
+                            <option>Feedback</option>
+                        </select>
+                        <textarea placeholder="Your Message" rows="5" required class="w-full contact-form-textarea mb-4"></textarea>
+                        <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-pink-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Address</h4>
+                                    <p class="text-gray-600">ATSS College, Chinchwad, Pune-19</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-phone text-pink-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Phone</h4>
+                                    <p class="text-gray-600">+91 97661 81212</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center space-x-4">
+                                <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-envelope text-pink-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-600">safety@atss.edu.in</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map Placeholder -->
+                    <div class="bg-gray-200 rounded-lg h-64 flex items-center justify-center overflow-hidden shadow-md">
+                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9a54385f-6971-4254-ae67-16cfb76003ad.png" alt="Interactive map showing ATSS College location in Chinchwad Pune with safety zones and emergency services marked" class="w-full h-full object-cover rounded-lg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-gradient text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-shield-alt text-white text-sm"></i>
+                        </div>
+                        <span class="font-bold text-lg">Women Safety Alert</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Empowering women with technology for a safer tomorrow.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-pink-500 transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#resources" class="text-gray-400 hover:text-white transition-colors">Resources</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Emergency</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>Women Helpline: 1091</li>
+                        <li>Police: 100</li>
+                        <li>Ambulance: 108</li>
+                        <li>Fire: 101</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Stay updated with safety tips and alerts</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Enter email" class="flex-1 p-2 rounded-l-lg border-0 focus:outline-none text-gray-800">
+                        <button onclick="showAlert('Newsletter subscription coming soon!')" class="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded-r-lg transition-colors">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2024 ATSS College Women Safety Alert. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SOS Button -->
+    <button class="sos-button" onclick="triggerSOS()">
+        SOS
+    </button>
+
+    <!-- Chatbot Toggle -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <!-- Chatbot Widget -->
+    <div id="chatbotWidget" class="chatbot-widget">
+        <div class="bg-gradient-to-r from-pink-500 to-purple-600 p-4 text-white">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-pink-500"></i>
+                    </div>
+                    <span class="font-semibold">Safety Assistant</span>
+                </div>
+                <button onclick="toggleChatbot()" class="text-white hover:text-gray-200">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-4 bg-white flex-1 flex flex-col justify-center items-center text-center">
+            <i class="fas fa-robot text-4xl text-gray-400 mb-4"></i>
+            <h3 class="text-lg font-semibold mb-2">Safety Assistant</h3>
+            <p class="text-gray-600 mb-4">Hello! I'm here to help you with safety information and emergency guidance.</p>
+            <p class="text-sm text-gray-500">Dialogflow integration coming soon...</p>
+            <div class="mt-4 space-y-2 w-full">
+                <button onclick="showAlert('Feature coming soon!')" class="w-full bg-pink-100 text-pink-600 p-2 rounded text-sm hover:bg-pink-200 transition-colors">
+                    How to send SOS alert?
+                </button>
+                <button onclick="showAlert('Feature coming soon!')" class="w-full bg-pink-100 text-pink-600 p-2 rounded text-sm hover:bg-pink-200 transition-colors">
+                    Add trusted contacts
+                </button>
+                <button onclick="showAlert('Feature coming soon!')" class="w-full bg-pink-100 text-pink-600 p-2 rounded text-sm hover:bg-pink-200 transition-colors">
+                    Report incident
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Modal -->
+    <div id="emergencyModal" class="emergency-modal">
+        <div class="modal-content">
+            <div class="text-red-600 text-6xl mb-4">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-4 text-red-600">EMERGENCY ALERT ACTIVATED</h2>
+            <p class="mb-6">Your emergency alert has been sent to:</p>
+            <ul class="text-left mb-6 space-y-2">
+                <li><i class="fas fa-check text-green-500"></i> Emergency contacts</li>
+                <li><i class="fas fa-check text-green-500"></i> Local police</li>
+                <li><i class="fas fa-check text-green-500"></i> Nearby volunteers</li>
+                <li><i class="fas fa-check text-green-500"></i> Location shared</li>
+            </ul>
+            <div class="space-y-3">
+                <button onclick="closeEmergencyModal()" class="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-semibold">
+                    I'm Safe Now
+                </button>
+                <button onclick="showAlert('Calling emergency services...')" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold">
+                    Call Police (100)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Chatbot toggle
+        function toggleChatbot() {
+            const widget = document.getElementById('chatbotWidget');
+            widget.style.display = widget.style.display === 'none' || widget.style.display === '' ? 'block' : 'none';
+        }
+
+        // SOS Button functionality
+        function triggerSOS() {
+            // Play SOS sound
+            const sosSound = document.getElementById('sosSound');
+            if (sosSound) {
+                sosSound.play().catch(e => console.error("Error playing sound:", e));
+            }
+
+            // Add alert animation to SOS button
+            const sosBtn = document.querySelector('.sos-button');
+            sosBtn.classList.add('alert-animation');
+            
+            // Show emergency modal
+            document.getElementById('emergencyModal').style.display = 'flex';
+            
+            // Simulate emergency alert process
+            setTimeout(() => {
+                // In real implementation, this would:
+                // 1. Get user's location
+                // 2. Send alerts to emergency contacts
+                // 3. Notify authorities
+                // 4. Alert nearby volunteers
+                console.log('Emergency alert sent!');
+            }, 1000);
+        }
+
+        // Close emergency modal
+        function closeEmergencyModal() {
+            document.getElementById('emergencyModal').style.display = 'none';
+            const sosBtn = document.querySelector('.sos-button');
+            sosBtn.classList.remove('alert-animation');
+            
+            // Stop SOS sound if playing
+            const sosSound = document.getElementById('sosSound');
+            if (sosSound) {
+                sosSound.pause();
+                sosSound.currentTime = 0; // Reset sound to beginning
+            }
+        }
+
+        // Form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            showAlert('Thank you for your message! We will get back to you soon.');
+            event.target.reset();
+        }
+
+        // General alert function
+        function showAlert(message) {
+            alert(message);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobileMenu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Simulate device shake detection for emergency
+        if ('DeviceMotionEvent' in window) {
+            let shakeThreshold = 15;
+            let lastShake = 0;
+            
+            window.addEventListener('devicemotion', function(e) {
+                let acceleration = e.accelerationIncludingGravity;
+                let curTime = new Date().getTime();
+                
+                if ((curTime - lastShake) > 1000) {
+                    let deltaX = Math.abs(acceleration.x);
+                    let deltaY = Math.abs(acceleration.y);
+                    let deltaZ = Math.abs(acceleration.z);
+                    
+                    if ((deltaX > shakeThreshold) || (deltaY > shakeThreshold) || (deltaZ > shakeThreshold)) {
+                        lastShake = curTime;
+                        if (confirm('Shake detected! Do you want to send an emergency alert?')) {
+                            triggerSOS();
+                        }
+                    }
+                }
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Press Ctrl + E for emergency
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                if (confirm('Emergency shortcut activated! Send SOS alert?')) {
+                    triggerSOS();
+                }
+            }
+            
+            // Press Ctrl + C for chatbot
+            if (e.ctrlKey && e.key === 'c') {
+                e.preventDefault();
+                toggleChatbot();
+            }
+        });
+
+        // Add some interactive animations on page load
+        window.addEventListener('load', function() {
+            // Animate feature cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all feature cards
+            document.querySelectorAll('.feature-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
